@@ -9,3 +9,18 @@ nav {
         @extend .navbar-brand;
     }
 }
+
+main {
+    @include make-row();
+    padding: 16px;
+
+    app-todolist-sidebar {
+        @extend .col-2;
+    }
+
+    app-todolist-tasks {
+        @extend .col-10;
+    }
+}
+
+

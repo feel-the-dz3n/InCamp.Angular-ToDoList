@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-todolist-sidebar',
@@ -6,7 +6,16 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./todolist-sidebar.component.scss']
 })
 export class TodolistSidebarComponent {
+  list: any;
+  @Input() todoLists: any;
+  @Output() select = new EventEmitter();
 
-  @Input() todoLists:any;
+  selectTodoList(list: any) {
+    this.list = list;
+    this.select.emit(list);
+  }
 
+  isTodoListSelected(list: any) {
+    return this.list === list;
+  }
 }

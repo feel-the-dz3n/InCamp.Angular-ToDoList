@@ -1,0 +1,15 @@
+@import '../../../styles.scss';
+
+ul {
+  @extend .list-group;
+
+  li {
+    @extend .list-group-item;
+
+    cursor: pointer;
+  }
+
+  li.selected {
+    @extend .active;
+  }
+}

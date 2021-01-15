@@ -1,2 +1,3 @@
+<h3 class="no-tasks" *ngIf="isTasksListEmpty()">There are no tasks yet</h3>
 <app-task *ngFor="let task of list.tasks" [task]="task"></app-task>
-<app-new-task-form></app-new-task-form>
+<app-new-task-form (submit)="list.tasks.push($event)"></app-new-task-form>

@@ -1,1 +1,6 @@
-<p>new-task-form works!</p>
+<form (submit)="addTask()">
+    <input type="text" placeholder="Title" [(ngModel)]="name" name="input-name">
+    <input type="text" placeholder="Description" [(ngModel)]="description" name="input-desc">
+    <input type="datetime-local" placeholder="Due Date" [(ngModel)]="dueTime" name="input-date">
+    <button type="submit">Add Task {{name}}</button>
+</form>

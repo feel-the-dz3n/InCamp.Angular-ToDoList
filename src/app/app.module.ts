@@ -6,6 +6,7 @@ import { TodolistSidebarComponent } from './todolist/todolist-sidebar/todolist-s
 import { TodolistTasksComponent } from './todolist/todolist-tasks/todolist-tasks.component';
 import { TaskComponent } from './todolist/task/task.component';
 import { NewTaskFormComponent } from './todolist/new-task-form/new-task-form.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { NewTaskFormComponent } from './todolist/new-task-form/new-task-form.com
     NewTaskFormComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,11 @@
+@import '../styles';
+
+nav {
+    @extend .navbar;
+    @extend .navbar-light;
+    @extend .bg-light;
+
+    h1 {
+        @extend .navbar-brand;
+    }
+}

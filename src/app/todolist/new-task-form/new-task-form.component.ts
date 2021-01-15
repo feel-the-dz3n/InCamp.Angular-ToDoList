@@ -6,14 +6,14 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./new-task-form.component.scss']
 })
 export class NewTaskFormComponent {
-  @Output() submit = new EventEmitter();
+  @Output() submitTask = new EventEmitter();
 
   name: any;
   description: any;
   dueTime: any;
 
   addTask() {
-    this.submit.emit({
+    this.submitTask.emit({
       title: this.name,
       description: this.description,
       dueTime: this.dueTime,

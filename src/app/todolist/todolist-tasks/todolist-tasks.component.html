@@ -1,6 +1,10 @@
 <div *ngIf="list" class="list-edit">
     <h3 class="ghost-text" *ngIf="list.tasks.length == 0">There are no tasks yet</h3>
-    <app-task *ngFor="let task of list.tasks" [task]="task"></app-task>
+    <ul>
+        <li *ngFor="let task of list.tasks">
+            <app-task [task]="task"></app-task>
+        </li>
+    </ul>
     <app-new-task-form (submitTask)="list.tasks.push($event)"></app-new-task-form>
 </div>
 <div *ngIf="!list" class="no-list">

@@ -1,5 +1,7 @@
+@import "../../../styles.scss";
+
 app-task {
-    margin: 8px;
+   // margin: 8px;
 }
 
 app-new-task-form {
@@ -9,4 +11,12 @@ app-new-task-form {
 h3.ghost-text {
     opacity: 50%;
     font-weight: 200;
+}
+
+ul {
+    @extend .list-group;
+
+    li {
+        @extend .list-group-item;
+    }
 }

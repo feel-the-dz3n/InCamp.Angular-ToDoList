@@ -2,6 +2,11 @@ app-task {
     margin: 8px;
 }
 
-h3.no-tasks {
+app-new-task-form {
+    margin: 8px;
+}
+
+h3.ghost-text {
     opacity: 50%;
+    font-weight: 200;
 }

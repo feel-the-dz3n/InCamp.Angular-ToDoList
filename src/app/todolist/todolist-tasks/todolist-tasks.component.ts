@@ -7,8 +7,4 @@ import { Component, Input } from '@angular/core';
 })
 export class TodolistTasksComponent {
   @Input() list: any;
-
-  isTasksListEmpty() {
-    return this.list.tasks.length === 0;
-  }
 }

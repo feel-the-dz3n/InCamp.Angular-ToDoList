@@ -4,5 +4,5 @@
 
 <main>
     <app-todolist-sidebar [todoLists]="todoLists" (select)="selectTodoList($event)"></app-todolist-sidebar>
-    <app-todolist-tasks *ngIf="selectedList" [list]="selectedList"></app-todolist-tasks>
+    <app-todolist-tasks [list]="selectedList"></app-todolist-tasks>
 </main>

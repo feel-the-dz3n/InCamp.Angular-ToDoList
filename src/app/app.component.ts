@@ -9,13 +9,16 @@ import { Component } from '@angular/core';
 
 export class AppComponent {
   selectedList: any;
-  todoLists: { name: any }[] = [
-    { name: "Important Tasks" },
-    { name: "Future Plans" },
-    { name: "Work" },
-    { name: "Ideas" },
-    { name: "Stuff" },
-  ];
+  todoLists: any[] = [
+      { name: "Important Tasks", tasks: [
+        { title: "Buy Food", description: "Bread, water, cat feed, etc.", done: false, dueTime: null },
+        { title: "Wash Car", done: true, dueTime: new Date("2022.01.01 00:00:00") }
+      ] },
+      { name: "Future Plans", tasks: [] },
+      { name: "Work", tasks: [] },
+      { name: "Ideas", tasks: [] },
+      { name: "Stuff", tasks: [] },
+    ];
 
   selectTodoList(list: any) {
     this.selectedList = list;

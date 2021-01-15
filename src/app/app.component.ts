@@ -1,10 +1,18 @@
 import { Component } from '@angular/core';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
+
 export class AppComponent {
-  title = 'angular-todolist';
+  todoLists: { name: any }[] = [
+    { name: "Important Tasks" },
+    { name: "Future Plans" },
+    { name: "Work" },
+    { name: "Ideas" },
+    { name: "Stuff" },
+  ];
 }

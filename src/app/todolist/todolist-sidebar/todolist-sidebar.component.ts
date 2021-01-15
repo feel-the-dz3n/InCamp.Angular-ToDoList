@@ -6,16 +6,16 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./todolist-sidebar.component.scss']
 })
 export class TodolistSidebarComponent {
-  list: any;
+  selectedList: any;
   @Input() todoLists: any;
   @Output() select = new EventEmitter();
 
   selectTodoList(list: any) {
-    this.list = list;
+    this.selectedList = list;
     this.select.emit(list);
   }
 
   isTodoListSelected(list: any) {
-    return this.list === list;
+    return this.selectedList === list;
   }
 }

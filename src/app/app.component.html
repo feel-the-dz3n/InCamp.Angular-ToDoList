@@ -3,6 +3,6 @@
 </nav>
 
 <main>
-    <app-todolist-sidebar [todoLists]="todoLists"></app-todolist-sidebar>
-    <app-todolist-tasks></app-todolist-tasks>
+    <app-todolist-sidebar [todoLists]="todoLists" (select)="selectTodoList($event)"></app-todolist-sidebar>
+    <app-todolist-tasks [list]="selectedList"></app-todolist-tasks>
 </main>

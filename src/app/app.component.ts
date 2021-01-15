@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
 })
 
 export class AppComponent {
+  selectedList: any;
   todoLists: { name: any }[] = [
     { name: "Important Tasks" },
     { name: "Future Plans" },
@@ -15,4 +16,8 @@ export class AppComponent {
     { name: "Ideas" },
     { name: "Stuff" },
   ];
+
+  selectTodoList(list: any) {
+    this.selectedList = list;
+  }
 }

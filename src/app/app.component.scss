@@ -1,27 +1,43 @@
-@import '../styles';
+@import "../styles";
+
+:host {
+    display: flex;
+    flex-flow: column;
+    height: 100vh;
+}
 
 nav {
-    @extend .navbar;
-    @extend .navbar-light;
-    @extend .bg-light;
+    width: 100%;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    background: $bkg;
+    border-bottom: 1px solid $borderColor;
 
     h1 {
-        @extend .navbar-brand;
-        margin-left: 16px;
+        padding-left: 16px;
+        font-style: normal;
+        font-weight: 400;
+        margin: 0;
+        font-size: 19px;
     }
 }
 
 main {
-    @include make-row();
-    padding: 16px;
+    flex: 1;
 
-    app-todolist-sidebar {
-        @extend .col-2;
+    display: flex;
+
+    .sidebar-container {
+        padding: 16px;
+        background: $bkg;
+        flex-basis: 25%;
+        overflow: auto;
     }
 
-    app-todolist-tasks {
-        @extend .col-10;
+    .task-list-container {
+        padding: 16px;
+        flex-basis: 75%;
+        overflow: auto;
     }
 }
-
-

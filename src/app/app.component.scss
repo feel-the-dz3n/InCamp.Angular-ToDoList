@@ -30,9 +30,10 @@ main {
 
     .sidebar-container {
         padding: 16px;
-        background: $bkg;
+        background: $sidebarBackground;
         flex-basis: 25%;
         overflow: auto;
+        border-right: 1px solid $borderColor;
     }
 
     .task-list-container {

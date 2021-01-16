@@ -8,6 +8,11 @@ import { Component, Input } from '@angular/core';
 export class TodolistTasksComponent {
   @Input() list: any;
 
+  addTask(task: any) {
+    this.list.tasks.push(task);
+  }
+
+
   isThereAreNoTasks() {
     return this.list.tasks.length == 0;
   }

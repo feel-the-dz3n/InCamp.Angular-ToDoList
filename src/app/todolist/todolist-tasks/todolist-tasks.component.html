@@ -5,6 +5,6 @@
         <app-task *ngFor="let task of list.tasks" [task]="task"></app-task>
     </div>
     <app-new-task-form class="new-task-form-container" *ngIf="isListAvailable()"
-        (submitTask)=" list.tasks.push($event)">
+        (submitTask)="addTask($event)">
     </app-new-task-form>
 </div>

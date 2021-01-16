@@ -11,13 +11,18 @@ export class NewTaskFormComponent {
   name: any;
 
   addTask() {
+    if (this.name === "") {
+      alert("The title is empty");
+      return;
+    }
+
     this.submitTask.emit({
       title: this.name,
       description: null,
       dueTime: null,
       done: false
     });
-    
+
     this.name = '';
   }
 }

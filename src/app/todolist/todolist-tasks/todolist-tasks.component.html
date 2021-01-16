@@ -1,7 +1,7 @@
 <div class="list-edit">
     <h3 class="ghost-text" *ngIf="isListNotAvailable()">Select task list to view your tasks</h3>
     <h3 class="ghost-text" *ngIf="isThereAreNoTasks()">There are no tasks yet</h3>
-    <div class="tasks-container" *ngIf="isListAvailable()">
+    <div class="tasks-container" [class.hidden]="isThereAreNoTasks()">
         <app-task *ngFor="let task of list.tasks" [task]="task"></app-task>
     </div>
     <app-new-task-form class="new-task-form-container" *ngIf="isListAvailable()"

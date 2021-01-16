@@ -1,9 +1,15 @@
 @import "../../../styles.scss";
 
 h3.ghost-text {
-    margin: 16px;
+    position: absolute;
+    top: 16px;
+    left: 16px;
     opacity: 50%;
     font-weight: 200;
+}
+
+.hidden {
+    display: none;
 }
 
 .list-edit {
@@ -25,9 +31,9 @@ h3.ghost-text {
         left: 0;
         width: 100%;
         height: 64px;
+        background: #f3f3f3;
+        border-top: 1px solid $borderColor;
 
-        app-new-task-form {
-            padding: 8px;
-        }
+        padding: 8px;
     }
 }

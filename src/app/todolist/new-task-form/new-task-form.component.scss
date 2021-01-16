@@ -1,13 +1,22 @@
 @import '../../../styles.scss';
 
 
+form {
+    display: flex;
+    flex-flow: row;
+    height: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
 input {
     @extend .form-control;
-    width: 400px;
-    display: inline-block;
+    flex-basis: 95%;
+    margin-right: 8px;
+    border-radius: 6px;
 }
 
 button[type="submit"] {
     @extend .btn, .btn-outline-primary;
-    display: inline-block;
+    border-radius: 50%;
 }

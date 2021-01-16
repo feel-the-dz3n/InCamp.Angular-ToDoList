@@ -1,5 +1,10 @@
-<input type="checkbox">
-<h3>{{task.title}}</h3>
-<p>{{task.description}}</p>
-<span class="dueTime">{{task.dueTime}}</span>
-<button>Remove</button>
+<form class="container">
+    <input type="checkbox">
+    <div class="task-values">
+        <h3>{{task.title}}</h3>
+        <p class="dueTime" [class.hidden]="isNoDueTime()">{{task.dueTime}}</p>
+        <p class="description" [class.hidden]="isNoDescription()">{{task.description}}</p>
+    </div>
+    <button type="submit">✅</button>
+    <button type="button">❌</button>
+</form>

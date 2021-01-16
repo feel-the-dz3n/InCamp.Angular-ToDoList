@@ -12,3 +12,39 @@ $taskBkgSelected: #f9ffff;
 :host:hover {
     background: $taskBkgSelected;
 }
+
+.container {
+    display: flex;
+    flex-flow: row;
+    margin: 0;
+    padding: 0;
+}
+
+input[type="checkbox"] {
+    align-self: center;
+}
+
+.hidden {
+    display: none;
+}
+
+h3 {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.task-values {
+    margin-left: 16px;
+    margin-right: 16px;
+    flex: 1;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+button {
+    align-self: center;
+    justify-self: flex-end;
+}

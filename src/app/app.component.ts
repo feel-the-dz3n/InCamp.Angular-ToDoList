@@ -14,7 +14,7 @@ export class AppComponent {
       name: "Important Tasks", tasks: [
         { title: "Buy Goods", description: "Bread, water, cat feed, etc.", done: false, dueTime: null },
         { title: "Wash Car", done: true, dueTime: new Date("2022.01.01 00:00:00") },
-        { title: "Write a Poem", description: "About programming patterns", done: false, dueTime: new Date("2022.01.01 00:00:00") }
+        { title: "Write a Poem", description: "About programming patterns", done: false, dueTime: new Date("2022.05.01 22:28:00") }
       ]
     },
     { name: "Future Plans", tasks: [] },

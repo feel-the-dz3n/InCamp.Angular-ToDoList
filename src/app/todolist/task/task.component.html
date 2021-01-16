@@ -1,10 +1,15 @@
-<form class="container">
+<form class="container" [class.selected]="isModified" (submit)="updateTask()">
     <input type="checkbox">
     <div class="task-values">
-        <h3>{{task.title}}</h3>
-        <p class="dueTime" [class.hidden]="isNoDueTime()">{{task.dueTime}}</p>
-        <p class="description" [class.hidden]="isNoDescription()">{{task.description}}</p>
+        <input type="text" [(ngModel)]="modificableTask.title" placeholder="Enter title" (input)="edit(false)"
+            class="input-title" name="title">
+        <input type="datetime-local" class="dueTime" [class.hidden]="isNoDueTime()" (input)="edit(false)"
+            [ngModel]="modificableTask.dueTime" name="dueTime" placeholder="Enter due time">
+        <input type="text" class="description" [class.hidden]="isNoDescription()" (input)="edit(false)"
+            [(ngModel)]="modificableTask.description" name="desc" placeholder="Enter description">
     </div>
-    <button type="submit" *ngIf="isSelected">✅</button>
-    <button type="button">❌</button>
+    <button type="submit" *ngIf="isModified">✅</button>
+    <button type="button" *ngIf="isModified" class="edit-button" (click)="edit(true)">✖️</button>
+    <button type="button" *ngIf="!isModified" class="edit-button" (click)="edit(true)">✏️</button>
+    <button type="button" class="remove-button" *ngIf="!isModified" (click)="removeTask()">❌</button>
 </form>

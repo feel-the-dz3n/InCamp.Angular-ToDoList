@@ -2,14 +2,6 @@ $taskBkg: rgba(0, 0, 0, 0.03);
 
 :host {
     display: block;
-    background: $taskBkg;
-    border: 1px solid rgba(0, 0, 0, 0.12);
-    border-radius: 5px;
-    padding: 16px;
-}
-
-:host:hover {
-    background: white;
 }
 
 .container {
@@ -17,25 +9,69 @@ $taskBkg: rgba(0, 0, 0, 0.03);
     flex-flow: row;
     margin: 0;
     padding: 0;
+    background: $taskBkg;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 5px;
+    padding: 16px;
+
+    .edit-button, .remove-button {
+        opacity: 0;
+    }
+
+    &:hover {
+        background: rgb(252, 252, 252);
+
+        .edit-button, .remove-button {
+            opacity: 100%;
+        }
+    }
+
+    &.selected {
+        background: rgb(255, 252, 227);
+
+        .edit-button, .remove-button {
+            opacity: 75%;
+        }
+    }
 }
 
 input[type="checkbox"] {
     align-self: center;
 }
 
-.hidden {
-    display: none;
+.input-title {
+    font-size: 18px;
+    font-weight: 400;
 }
 
-h3 {
-    font-size: 20px;
-    font-weight: 400;
+.dueTime,
+.description {
+    font-size: 15px;
+    font-weight: 300;
 }
 
 .task-values {
     margin-left: 16px;
     margin-right: 16px;
     flex: 1;
+
+    input {
+        display: block;
+        background: none;
+        border: 1px solid rgba(0, 0, 0, 0);
+        border-radius: 5px;
+    }
+
+    input:hover,
+    input:active {
+        background: rgba(255, 255, 255, 0.123);
+        border: 1px solid black;
+    }
+
+    .hidden {
+        display: none;
+        visibility: collapse;
+    }
 }
 
 p {

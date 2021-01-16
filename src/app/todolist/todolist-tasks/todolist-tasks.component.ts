@@ -7,22 +7,9 @@ import { Component, Input } from '@angular/core';
 })
 export class TodolistTasksComponent {
   @Input() list: any;
-  selectedTask: any;
 
   addTask(task: any) {
     this.list.tasks.push(task);
-  }
-
-  isTaskSelected(task: any) {
-    return this.selectedTask === task;
-  }
-
-  selectTask(task: any) {
-    if (this.selectedTask) {
-      // TODO: prompt should we save the data
-    }
-
-    this.selectedTask = task;
   }
 
   isThereAreNoTasks() {

@@ -13,6 +13,7 @@ $taskBkg: rgba(0, 0, 0, 0.03);
     border: 1px solid rgba(0, 0, 0, 0.12);
     border-radius: 5px;
     padding: 16px;
+    transition: background 0.15s ease-out;
 
     .edit-button, .remove-button {
         opacity: 0;

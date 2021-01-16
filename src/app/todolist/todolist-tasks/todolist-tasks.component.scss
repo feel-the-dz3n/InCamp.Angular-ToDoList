@@ -1,18 +1,33 @@
 @import "../../../styles.scss";
 
-app-new-task-form {
-    margin: 8px;
-}
-
 h3.ghost-text {
+    margin: 16px;
     opacity: 50%;
     font-weight: 200;
 }
 
-ul {
-    @extend .list-group;
+.list-edit {
+    height: 100%;
+    position: relative;
 
-    li {
-        @extend .list-group-item;
+    .tasks-container {
+        height: 80vh;
+        overflow-y: auto;
+
+        app-task {
+            margin: 16px;
+        }
+    }
+
+    .new-task-form-container {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 64px;
+
+        app-new-task-form {
+            padding: 8px;
+        }
     }
 }

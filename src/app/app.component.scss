@@ -32,13 +32,12 @@ main {
         padding: 16px;
         background: $sidebarBackground;
         flex-basis: 25%;
-        overflow: auto;
+        overflow: hidden;
         border-right: 1px solid $borderColor;
     }
 
     .task-list-container {
-        padding: 16px;
         flex-basis: 75%;
-        overflow: auto;
+        overflow: hidden;
     }
 }

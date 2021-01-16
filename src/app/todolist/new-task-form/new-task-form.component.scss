@@ -1,21 +1,13 @@
 @import '../../../styles.scss';
 
-form {
-    margin: auto;
-    display: flex;
-    flex-flow: column wrap;
-    max-width: 400px;
-}
 
 input {
     @extend .form-control;
-    margin-top: 4px;
+    width: 400px;
+    display: inline-block;
 }
 
 button[type="submit"] {
     @extend .btn, .btn-outline-primary;
-
-    margin-top: 8px;
-    align-self: flex-end;
-    min-width: 150px;
+    display: inline-block;
 }

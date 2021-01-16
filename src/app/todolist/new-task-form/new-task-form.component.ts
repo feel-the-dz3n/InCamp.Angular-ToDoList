@@ -9,19 +9,15 @@ export class NewTaskFormComponent {
   @Output() submitTask = new EventEmitter();
 
   name: any;
-  description: any;
-  dueTime: any;
 
   addTask() {
     this.submitTask.emit({
       title: this.name,
-      description: this.description,
-      dueTime: this.dueTime,
+      description: null,
+      dueTime: null,
       done: false
     });
     
     this.name = '';
-    this.description = '';
-    this.dueTime = null;
   }
 }

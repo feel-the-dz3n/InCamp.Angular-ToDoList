@@ -7,6 +7,7 @@ import { Component, Input } from '@angular/core';
 })
 export class TaskComponent {
   @Input() task: any;
+  @Input() isSelected: any;
 
   isNoDescription() {
     return this.task.description ? false : true;

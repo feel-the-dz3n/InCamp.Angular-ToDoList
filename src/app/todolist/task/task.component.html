@@ -5,6 +5,6 @@
         <p class="dueTime" [class.hidden]="isNoDueTime()">{{task.dueTime}}</p>
         <p class="description" [class.hidden]="isNoDescription()">{{task.description}}</p>
     </div>
-    <button type="submit">✅</button>
+    <button type="submit" *ngIf="isSelected">✅</button>
     <button type="button">❌</button>
 </form>

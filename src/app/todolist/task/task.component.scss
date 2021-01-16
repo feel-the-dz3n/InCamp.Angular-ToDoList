@@ -1,5 +1,4 @@
 $taskBkg: rgba(0, 0, 0, 0.03);
-$taskBkgSelected: #f9ffff;
 
 :host {
     display: block;
@@ -10,7 +9,7 @@ $taskBkgSelected: #f9ffff;
 }
 
 :host:hover {
-    background: $taskBkgSelected;
+    background: white;
 }
 
 .container {
@@ -47,4 +46,16 @@ p {
 button {
     align-self: center;
     justify-self: flex-end;
+    border-radius: 50%;
+    height: 48px;
+    width: 48px;
+    padding: 0;
+    background: 0;
+    border: none;
+}
+
+button[type="submit"] {
+    margin-right: 8px;
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.144);
 }

@@ -22,7 +22,6 @@ export class TaskComponent {
     this.modificableTask = new Task(0, false, "Unknown Task", null, null);
   }
 
-
   ngOnChanges(changes: SimpleChanges) {
     if (changes["task"]) {
       let newTask = changes["task"].currentValue;

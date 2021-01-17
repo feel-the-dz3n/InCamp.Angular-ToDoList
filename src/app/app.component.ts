@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { IdService } from './id.service';
 import { Task } from './task.model';
 import { TaskList } from './tasklist.model';
 
@@ -9,22 +10,29 @@ import { TaskList } from './tasklist.model';
   styleUrls: ['./app.component.scss']
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
   selectedList: any;
-  todoLists: TaskList[] = [
-    {
-      id: 1,
-      name: "Important Tasks", tasks: [
-        new Task(1, false, "Buy Goods", "Bread, water, cat feed, etc.", null),
-        new Task(2, true, "Wash a Car", null, new Date("2022.01.01 00:00:00")),
-        new Task(3, false, "Write a Poem", "About programming patterns.", new Date("2022.05.01 22:28:00"))
-      ]
-    },
-    { id: 2, name: "Future Plans", tasks: [] },
-    { id: 3, name: "Work", tasks: [] },
-    { id: 4, name: "Ideas", tasks: [] },
-    { id: 5, name: "Stuff", tasks: [] },
-  ];
+  todoLists: TaskList[] = [];
+
+  constructor(private idService: IdService) {
+  }
+
+  ngOnInit() {
+    this.todoLists = [
+      {
+        id: this.idService.getId(),
+        name: "Important Tasks", tasks: [
+          new Task(this.idService.getId(), false, "Buy Goods", "Bread, water, cat feed, etc.", null),
+          new Task(this.idService.getId(), true, "Wash a Car", null, new Date("2022.01.01 00:00:00")),
+          new Task(this.idService.getId(), false, "Write a Poem", "About programming patterns.", new Date("2022.05.01 22:28:00"))
+        ]
+      },
+      { id: this.idService.getId(), name: "Future Plans", tasks: [] },
+      { id: this.idService.getId(), name: "Work", tasks: [] },
+      { id: this.idService.getId(), name: "Ideas", tasks: [] },
+      { id: this.idService.getId(), name: "Stuff", tasks: [] },
+    ];
+  }
 
   selectTodoList(list: any) {
     this.selectedList = list;

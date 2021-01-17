@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { IdService } from 'src/app/id.service';
 import { Task } from 'src/app/task.model';
 import { TaskList } from 'src/app/tasklist.model';
 
@@ -10,7 +11,7 @@ import { TaskList } from 'src/app/tasklist.model';
 export class TodolistTasksComponent {
   @Input() list: TaskList;
 
-  constructor() {
+  constructor(private idService: IdService) {
     this.list = new TaskList();
   }
 
@@ -30,6 +31,7 @@ export class TodolistTasksComponent {
   }
 
   addTask(task: Task) {
+    task.id = this.idService.getId();
     this.list.tasks.push(task);
   }
 

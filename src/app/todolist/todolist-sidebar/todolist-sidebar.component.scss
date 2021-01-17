@@ -1,11 +1,37 @@
 @import '../../../styles.scss';
 
+@keyframes fadeIn {
+  0% {
+      opacity: 0;
+      transform: scale(0.95, 0.95);
+  }
+  100% {
+      opacity: 1;
+      transform: scale(1);
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+      opacity: 1;
+  }
+  99% {
+      transform: scale(0.95, 0.95);
+  }
+  100% {
+      opacity: 0;
+      display: none;
+      pointer-events: none;
+  }
+}
+
 ul {
   @extend .list-group;
 
   li {
     @extend .list-group-item;
     
+    animation: fadeIn 200ms ease-in-out forwards;
     background: rgba(255, 255, 255, 0.78);
     cursor: pointer;
   }

@@ -9,13 +9,16 @@ import { Task } from 'src/app/task.model';
 export class TaskComponent {
   @Input() task: Task;
   @Output() modelUpdated = new EventEmitter();
+  @Output() remove = new EventEmitter();
   modificableTask: Task;
   isModified: boolean;
   isUpdating: boolean;
+  isRemoving: boolean;
   dateString: string;
 
   constructor() {
     this.dateString = "";
+    this.isRemoving = false;
     this.isModified = false;
     this.isUpdating = false;
     this.task = new Task(0, false, "Unknown Task", null, null);
@@ -84,7 +87,8 @@ export class TaskComponent {
   }
 
   removeTask() {
-
+    this.isRemoving = true;
+    this.remove.emit(this.task);
   }
 
   isNoDescription() {

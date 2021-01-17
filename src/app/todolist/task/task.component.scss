@@ -4,6 +4,31 @@ $taskBkg: rgba(0, 0, 0, 0.03);
     display: block;
 }
 
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.95, 0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    99% {
+        transform: scale(0.95, 0.95);
+    }
+    100% {
+        opacity: 0;
+        display: none;
+        pointer-events: none;
+    }
+}
+
 @keyframes flicker {
     0% {
         opacity: 25%;
@@ -17,6 +42,8 @@ $taskBkg: rgba(0, 0, 0, 0.03);
 }
 
 .container {
+    animation: fadeIn 200ms ease-in-out forwards;
+
     display: flex;
     flex-flow: row;
     margin: 0;
@@ -56,6 +83,11 @@ $taskBkg: rgba(0, 0, 0, 0.03);
 
     &.updating {
         animation: flicker 500ms ease-in-out infinite;
+        pointer-events: none;
+    }
+
+    &.removing {
+        animation: fadeOut 200ms ease-in-out forwards;
         pointer-events: none;
     }
 }

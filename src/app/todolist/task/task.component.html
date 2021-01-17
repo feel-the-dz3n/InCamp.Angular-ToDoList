@@ -1,10 +1,12 @@
-<form class="container" [class.selected]="isModified" [class.updating]="isUpdating" (submit)="updateTask()">
+<form class="container" [class.selected]="isModified" [class.updating]="isUpdating" [class.removing]="isRemoving"
+    (submit)="updateTask()">
     <input type="checkbox" [(ngModel)]="modificableTask.done" name="done" (click)="doneChanged()">
     <div class="task-values">
         <input type="text" [(ngModel)]="modificableTask.title" placeholder="Enter title" (input)="edit(false)"
             class="input-title" [class.strikethrough]="modificableTask.done" name="title">
-        <input type="datetime-local" class="dueTime" [class.hidden]="!isModified && !isDueTimeValid()" (input)="edit(false)"
-            [ngModel]="modificableTask.getDateString()" (ngModelChange)="dateString = $event" name="dueTime" placeholder="Enter due time">
+        <input type="datetime-local" class="dueTime" [class.hidden]="!isModified && !isDueTimeValid()"
+            (input)="edit(false)" [ngModel]="modificableTask.getDateString()" (ngModelChange)="dateString = $event"
+            name="dueTime" placeholder="Enter due time">
         <input type="text" class="description" [class.hidden]="!isModified && isNoDescription()" (input)="edit(false)"
             [(ngModel)]="modificableTask.description" name="desc" placeholder="Enter description">
     </div>

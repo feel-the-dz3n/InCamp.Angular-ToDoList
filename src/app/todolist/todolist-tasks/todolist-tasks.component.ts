@@ -35,6 +35,13 @@ export class TodolistTasksComponent {
     this.list.tasks.push(task);
   }
 
+  removeTask(task: Task) {
+    setTimeout(() => {
+      let idx = this.list.tasks.indexOf(task);
+      this.list.tasks.splice(idx, 1);
+    }, 500);
+  }
+
   isThereAreNoTasks() {
     return this.list && this.list.tasks.length == 0;
   }

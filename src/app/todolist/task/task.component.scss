@@ -2,6 +2,7 @@ $taskBkg: rgba(0, 0, 0, 0.03);
 
 :host {
     display: block;
+    animation: fadeIn 200ms ease-in-out forwards;
 }
 
 @keyframes fadeIn {
@@ -40,8 +41,6 @@ $taskBkg: rgba(0, 0, 0, 0.03);
 }
 
 .container {
-    animation: fadeIn 200ms ease-in-out forwards;
-
     display: flex;
     flex-flow: row;
     margin: 0;

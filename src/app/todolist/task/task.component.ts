@@ -1,4 +1,5 @@
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
+import { Task } from 'src/app/task.model';
 
 @Component({
   selector: 'app-task',
@@ -6,24 +7,21 @@ import { Component, Input, SimpleChanges } from '@angular/core';
   styleUrls: ['./task.component.scss']
 })
 export class TaskComponent {
-  @Input() task: any;
-  modificableTask: any;
-  isModified: any;
+  @Input() task: Task;
+  @Output() modelUpdated = new EventEmitter();
+  modificableTask: Task;
+  isModified: boolean;
+  isUpdating: boolean;
+  dateString: string;
 
   constructor() {
+    this.dateString = "";
     this.isModified = false;
-    this.modificableTask = {
-      title: "Unknown Task"
-    };
+    this.isUpdating = false;
+    this.task = new Task(0, false, "Unknown Task", null, null);
+    this.modificableTask = new Task(0, false, "Unknown Task", null, null);
   }
 
-  private toDateString(date: Date): any {
-    return date ? ((date.getFullYear().toString() + '-'
-      + ("0" + (date.getMonth() + 1)).slice(-2) + '-'
-      + ("0" + (date.getDate())).slice(-2))
-      + 'T' + date.toTimeString().slice(0, 5))
-      : null;
-  }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes["task"]) {
@@ -38,11 +36,23 @@ export class TaskComponent {
     // or modifications can canceled and reverted instead
     Object.assign(this.modificableTask, newTask);
 
-    // since datettime-local input can only understand yyyy-MM-ddTHH:mm 
-    // we have to replace existing value with that type string
-    this.modificableTask.dueTime = this.toDateString(this.modificableTask.dueTime);
-
     this.isModified = false;
+  }
+
+  doneChanged() {
+    // If user is not editing this form, but press checkbox
+    // Probably he wants to mark task as completed in fastest way
+    // So this means that this change is the only one in this model
+    // So immediately send an update request
+    if (!this.isModified) {
+      // Workaround:
+      // For some reason, ngModel doesn't set value on done at this point
+      // And if we call updateTask right now, it will use old value
+      // So we gonna wait 500ms before sending a request
+      // But setting this form type is already updating
+      this.isUpdating = true;
+      setTimeout(() => this.updateTask(), 500);
+    }
   }
 
   edit(canBeCanceled: boolean) {
@@ -59,7 +69,19 @@ export class TaskComponent {
   }
 
   updateTask() {
+    this.isUpdating = true;
+    let updatedModel = Object.assign({}, this.modificableTask);
 
+    // Assign a new date, because ngModel at datetime-local 
+    // can't work with Date objects
+    updatedModel.dueTime = new Date(this.dateString);
+
+    // simulating request delay
+    setTimeout(() => {
+      this.isUpdating = false;
+      this.modelUpdated.emit(updatedModel);
+      this.isModified = false;
+    }, 500);
   }
 
   removeTask() {

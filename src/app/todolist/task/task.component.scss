@@ -4,6 +4,18 @@ $taskBkg: rgba(0, 0, 0, 0.03);
     display: block;
 }
 
+@keyframes flicker {
+    0% {
+        opacity: 25%;
+    }
+    50% {
+        opacity: 50%;
+    }
+    100% {
+        opacity: 25%;
+    }
+}
+
 .container {
     display: flex;
     flex-flow: row;
@@ -15,14 +27,16 @@ $taskBkg: rgba(0, 0, 0, 0.03);
     padding: 16px;
     transition: background 0.15s ease-out;
 
-    .edit-button, .remove-button {
+    .edit-button,
+    .remove-button {
         opacity: 0;
     }
 
     &:hover {
         background: rgb(252, 252, 252);
 
-        .edit-button, .remove-button {
+        .edit-button,
+        .remove-button {
             opacity: 100%;
         }
     }
@@ -30,7 +44,8 @@ $taskBkg: rgba(0, 0, 0, 0.03);
     &.selected {
         background: rgb(255, 252, 227);
 
-        .edit-button, .remove-button {
+        .edit-button,
+        .remove-button {
             opacity: 75%;
         }
 
@@ -38,6 +53,16 @@ $taskBkg: rgba(0, 0, 0, 0.03);
             border-bottom: 1px solid rgba(0, 0, 0, 0.07);
         }
     }
+
+    &.updating {
+        animation: flicker 500ms ease-in-out infinite;
+        pointer-events: none;
+    }
+}
+
+.strikethrough {
+    text-decoration: line-through;
+    opacity: 75%;
 }
 
 input[type="checkbox"] {
@@ -49,12 +74,14 @@ input[type="checkbox"] {
 .input-title {
     font-size: 18px;
     font-weight: 400;
+    color: black;
 }
 
 .dueTime,
 .description {
     font-size: 15px;
     font-weight: 300;
+    color: rgba(0, 0, 0, 0.75);
 }
 
 input[type="datetime-local"]::-webkit-calendar-picker-indicator {

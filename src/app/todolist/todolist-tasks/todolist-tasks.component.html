@@ -2,7 +2,7 @@
     <h3 class="ghost-text" *ngIf="isListNotAvailable()">Select task list to view your tasks</h3>
     <h3 class="ghost-text" *ngIf="isThereAreNoTasks()">There are no tasks yet</h3>
     <div class="tasks-container" [class.hidden]="isThereAreNoTasks()">
-        <app-task *ngFor="let task of getTasks()" [task]="task"></app-task>
+        <app-task *ngFor="let task of getTasks()" [task]="task" (modelUpdated)="modelUpdated($event)"></app-task>
     </div>
     <app-new-task-form class="new-task-form-container" *ngIf="isListAvailable()" (submitTask)="addTask($event)">
     </app-new-task-form>

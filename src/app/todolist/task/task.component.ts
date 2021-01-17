@@ -51,7 +51,7 @@ export class TaskComponent {
       // For some reason, ngModel doesn't set value on done at this point
       // And if we call updateTask right now, it will use old value
       // So we gonna wait 500ms before sending a request
-      // But setting this form type is already updating
+      // But for visuals, set isUpdating true
       this.isUpdating = true;
       setTimeout(() => this.updateTask(), 500);
     }

@@ -91,7 +91,8 @@ export class TaskComponent {
     return this.task.description ? false : true;
   }
 
-  isNoDueTime() {
-    return this.task.dueTime ? false : true;
+  isDueTimeValid() {
+    let dateTime = this.task.dueTime;
+    return dateTime && dateTime > new Date(0)
   }
 }

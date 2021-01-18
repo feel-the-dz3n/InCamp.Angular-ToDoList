@@ -1,1 +1,7 @@
-<p>dashboard works!</p>
+<h3 *ngIf="todoLists == undefined" class="loading-text">Loading</h3>
+
+<ul *ngIf="todoLists != undefined">
+    <li *ngFor="let list of todoLists" (click)="selectTodoList(list)" [class.selected]="isTodoListSelected(list)">
+        {{list.name}}
+    </li>
+</ul>

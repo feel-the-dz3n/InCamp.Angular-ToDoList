@@ -4,7 +4,7 @@
 
 <main>
     <div class="sidebar-container">
-        <app-todolist-sidebar [todoLists]="todoLists" (select)="selectTodoList($event)"></app-todolist-sidebar>
+        <app-dashboard (select)="selectTodoList($event)"></app-dashboard>
     </div>
     <div class="task-list-container">
         <router-outlet></router-outlet>

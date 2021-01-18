@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TodayTasksComponent } from './today-tasks/today-tasks.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,11 @@ import { TodoListComponent } from './todo-list/todo-list.component';
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    RouterModule.forRoot([
+      { path: 'today', component: TodayTasksComponent },
+      { path: 'todo-list/:id', component: TodoListComponent },
+    ]),
   ],
   providers: [],
   bootstrap: [AppComponent]

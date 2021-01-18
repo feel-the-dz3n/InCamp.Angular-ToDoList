@@ -45,7 +45,7 @@ export class TodolistTasksComponent implements OnChanges {
   }
 
   taskRemoved(task: Task) {
-    // TODO
+    this.tasks?.splice(this.tasks?.indexOf(task), 1);
   }
 
   getTasks() {

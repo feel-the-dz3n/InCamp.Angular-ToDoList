@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { Task } from 'src/app/task.model';
+import { TaskService } from 'src/app/task.service';
 
 @Component({
   selector: 'app-task',
@@ -16,7 +17,7 @@ export class TaskComponent {
   isRemoving: boolean;
   dateString: string;
 
-  constructor() {
+  constructor(private taskService: TaskService) {
     this.dateString = "";
     this.isRemoving = false;
     this.isModified = false;
@@ -88,7 +89,16 @@ export class TaskComponent {
 
   removeTask() {
     this.isRemoving = true;
-    this.remove.emit(this.task);
+    this.taskService.removeTask(this.task.id).subscribe(
+      (r) => {
+        this.remove.emit(this.task);
+      },
+      (e) => {
+        alert("Failed to remove task");
+        console.log(e);
+        this.isRemoving = false;
+      }
+    );
   }
 
   isNoDescription() {

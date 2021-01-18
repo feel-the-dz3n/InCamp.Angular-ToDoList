@@ -20,11 +20,15 @@ export class TaskService {
     return this.http.get<Dashboard>(this.dashboardEndpoint);
   }
 
-  getTaskListTasks(taskListId: any): Observable<Task[]> {
+  getTaskListTasks(taskListId: number): Observable<Task[]> {
     return this.http.get<Task[]>(this.listsEndpoint + `/${taskListId}/tasks`);
   }
 
   addTask(task: Task): Observable<Task> {
     return this.http.post<Task>(this.tasksEndpoint, task);
+  }
+
+  removeTask(taskId: number) {
+    return this.http.delete(this.tasksEndpoint + `/${taskId}`);
   }
 }

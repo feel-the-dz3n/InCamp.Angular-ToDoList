@@ -23,35 +23,29 @@ export class TodolistTasksComponent implements OnChanges {
       let newList = changes["list"].currentValue;
       if (newList) {
         this.isLoading = true;
-        this.taskService.getTaskListTasks(newList.id).subscribe(
-          (r) => { this.tasks = r; },
-          (e) => { alert("Failed to get tasks"); console.log(e); },
-          () => { this.isLoading = false; }
-        );
+        this.refreshList(newList);
       }
     }
   }
 
+  refreshList(list: TaskList) {
+    this.taskService.getTaskListTasks(list.id).subscribe(
+      (r) => { this.tasks = r; },
+      (e) => { alert("Failed to get tasks"); console.log(e); },
+      () => { this.isLoading = false; }
+    );
+  }
+
   modelUpdated(newTask: Task) {
-    /* for (let oldTask of this.list.tasks) {
-      if (oldTask.id === newTask.id) {
-        console.log("old", oldTask, " -> ", newTask);
-        Object.assign(oldTask, newTask);
-        return;
-      }
-    } */
+    // TODO
   }
 
-  addTask(task: Task) {
-    // task.id = this.idService.getId();
-    // this.list.tasks.push(task);
+  taskAdded(task: Task) {
+    this.tasks?.push(task);
   }
 
-  removeTask(task: Task) {
-    /* setTimeout(() => {
-      let idx = this.list.tasks.indexOf(task);
-      this.list.tasks.splice(idx, 1);
-    }, 500); */
+  taskRemoved(task: Task) {
+    // TODO
   }
 
   getTasks() {

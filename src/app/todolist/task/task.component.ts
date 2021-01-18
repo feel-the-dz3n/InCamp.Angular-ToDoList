@@ -21,8 +21,8 @@ export class TaskComponent {
     this.isRemoving = false;
     this.isModified = false;
     this.isUpdating = false;
-    this.task = new Task(0, false, "Unknown Task", null, null, null);
-    this.modificableTask = new Task(0, false, "Unknown Task", null, null, null);
+    this.task = new Task(0, false, "Unknown Task", undefined, undefined, undefined);
+    this.modificableTask = new Task(0, false, "Unknown Task", undefined, undefined, undefined);
   }
 
   ngOnChanges(changes: SimpleChanges) {

@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
-import { IdService } from 'src/app/id.service';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Task } from 'src/app/task.model';
+import { TaskService } from 'src/app/task.service';
 import { TaskList } from 'src/app/tasklist.model';
 
 @Component({
@@ -8,17 +9,27 @@ import { TaskList } from 'src/app/tasklist.model';
   templateUrl: './todolist-tasks.component.html',
   styleUrls: ['./todolist-tasks.component.scss']
 })
-export class TodolistTasksComponent {
+export class TodolistTasksComponent implements OnChanges {
   @Input() list: TaskList;
+  tasks: Task[] | undefined;
+  isLoading: boolean = false;
 
-  constructor(private idService: IdService) {
+  constructor(private taskService: TaskService) {
     this.list = new TaskList(0, "Unknown");
   }
 
-  getTasks() {
-    /* if (this.list) return this.list.tasks;
-    else return []; */
-    return [];
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes["list"]) {
+      let newList = changes["list"].currentValue;
+      if (newList) {
+        this.isLoading = true;
+        this.taskService.getTaskListTasks(newList.id).subscribe(
+          (r) => { this.tasks = r; },
+          (e) => { alert("Failed to get tasks"); console.log(e); },
+          () => { this.isLoading = false; }
+        );
+      }
+    }
   }
 
   modelUpdated(newTask: Task) {
@@ -43,8 +54,12 @@ export class TodolistTasksComponent {
     }, 500); */
   }
 
+  getTasks() {
+    return this.isThereAreNoTasks() ? [] : this.tasks;
+  }
+
   isThereAreNoTasks() {
-    return true;// return this.list && this.list.tasks.length == 0;
+    return this.tasks && this.tasks.length == 0;
   }
 
   isListAvailable() {

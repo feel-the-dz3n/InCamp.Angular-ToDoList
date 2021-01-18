@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { Dashboard } from './dashboard.model';
 import { Task } from './task.model';
+import { TaskList } from './tasklist.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,10 @@ export class TaskService {
   private listsEndpoint: string = this.endpoint + "lists";
 
   constructor(private http: HttpClient) { }
+
+  getTaskList(id: number): Observable<TaskList> {
+    return this.http.get<TaskList>(this.listsEndpoint + `/${id}`);
+  }
 
   getDashboard(): Observable<Dashboard> {
     return this.http.get<Dashboard>(this.dashboardEndpoint);

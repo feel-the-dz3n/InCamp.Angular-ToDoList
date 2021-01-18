@@ -15,10 +15,8 @@ export class TaskComponent {
   isModified: boolean;
   isUpdating: boolean;
   isRemoving: boolean;
-  dateString: string;
 
   constructor(private taskService: TaskService) {
-    this.dateString = "";
     this.isRemoving = false;
     this.isModified = false;
     this.isUpdating = false;
@@ -75,10 +73,6 @@ export class TaskComponent {
     this.isUpdating = true;
     let updatedModel = Object.assign({}, this.modificableTask);
 
-    // Assign a new date, because ngModel at datetime-local 
-    // can't work with Date objects
-    updatedModel.dueTime = new Date(this.dateString);
-
     this.taskService.putTask(updatedModel.id, updatedModel).subscribe(
       (r) => {
         this.modelUpdated.emit(r);
@@ -112,7 +106,6 @@ export class TaskComponent {
   }
 
   isDueTimeValid() {
-    let dateTime = this.task.dueTime;
-    return dateTime && dateTime > new Date(0)
+    return this.task.dueTime && new Date(this.task.dueTime) > new Date(0)
   }
 }

@@ -29,6 +29,7 @@ import { RouterModule } from '@angular/router';
     RouterModule.forRoot([
       { path: 'today', component: TodayTasksComponent },
       { path: 'todo-list/:id', component: TodoListComponent },
+      { path: '', redirectTo: '/today', pathMatch: 'full' },
     ]),
   ],
   providers: [],

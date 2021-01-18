@@ -39,5 +39,9 @@ main {
     .content-container {
         flex-basis: 75%;
         overflow: hidden;
+
+        router-outlet {
+            width: 100%;
+        }
     }
 }

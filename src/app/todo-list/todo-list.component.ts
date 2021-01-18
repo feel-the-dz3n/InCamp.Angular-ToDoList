@@ -1,6 +1,7 @@
 import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { Task } from 'src/app/task.model';
 import { TaskService } from 'src/app/task.service';
 import { TaskList } from 'src/app/tasklist.model';
@@ -11,32 +12,31 @@ import { TaskList } from 'src/app/tasklist.model';
   styleUrls: ['./todo-list.component.scss']
 })
 export class TodoListComponent implements OnInit {
-  list: TaskList;
+  listId: any;
   tasks: Task[] | undefined;
   isLoading: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
     private taskService: TaskService) {
-    this.list = new TaskList(0, "Unknown");
+    // this.list = new TaskList(0, "Unknown");
   }
 
   ngOnInit() {
-    const id:any = this.route.snapshot.paramMap.get('id');
     this.isLoading = true;
 
-    if (id != null) {
-      this.taskService.getTaskList(id).subscribe(
-        r => {
-          this.list = r; // TODO handle errors
-          this.refreshList(this.list);
-        }
-      );
-    }
+    this.route.paramMap.pipe(
+      switchMap(async (params) => params.get('id'))
+    ).subscribe(data => {
+      console.log("route for todo-list changed", data);
+      this.listId = data;
+      this.isLoading = true;
+      this.refreshListTasks();
+    });
   }
 
-  refreshList(list: TaskList) {
-    this.taskService.getTaskListTasks(list.id, true).subscribe(
+  refreshListTasks() {
+    this.taskService.getTaskListTasks(this.listId, true).subscribe(
       (r) => { this.tasks = r; },
       (e) => { alert("Failed to get tasks"); console.log(e); },
       () => { this.isLoading = false; }
@@ -71,7 +71,7 @@ export class TodoListComponent implements OnInit {
   }
 
   isListAvailable() {
-    return this.list ? true : false;
+    return this.listId ? true : false;
   }
 
   isListNotAvailable() {

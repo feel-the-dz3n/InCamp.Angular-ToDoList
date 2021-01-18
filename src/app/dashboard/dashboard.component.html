@@ -1,10 +1,10 @@
-<h3 *ngIf="todoLists == undefined" class="loading-text">Loading</h3>
+<h3 *ngIf="isLoading" class="loading-text">Loading</h3>
 
-<ul>
-    <li [routerLink]="['/today']" (click)="selectTodoList(undefined)" [class.selected]="selectedList == undefined">Today
+<ul *ngIf="!isLoading">
+    <li [routerLink]="['/today']" [class.selected]="!selectedListId">Today
     </li>
-    <li *ngFor="let list of todoLists" [routerLink]="['/todo-list', list.id]" (click)="selectTodoList(list)"
-        [class.selected]="isTodoListSelected(list)">
+    <li *ngFor="let list of todoLists" [routerLink]="['/todo-list', list.id]"
+        [class.selected]="selectedListId == list.id">
         {{list.name}}
     </li>
 </ul>

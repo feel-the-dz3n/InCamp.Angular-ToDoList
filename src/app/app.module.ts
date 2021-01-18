@@ -8,6 +8,9 @@ import { TodolistTasksComponent } from './todolist/todolist-tasks/todolist-tasks
 import { TaskComponent } from './todolist/task/task.component';
 import { NewTaskFormComponent } from './todolist/new-task-form/new-task-form.component';
 import { FormsModule } from '@angular/forms';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { TodayTasksComponent } from './today-tasks/today-tasks.component';
+import { TodoListComponent } from './todo-list/todo-list.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +18,10 @@ import { FormsModule } from '@angular/forms';
     TodolistSidebarComponent,
     TodolistTasksComponent,
     TaskComponent,
-    NewTaskFormComponent
+    NewTaskFormComponent,
+    DashboardComponent,
+    TodayTasksComponent,
+    TodoListComponent
   ],
   imports: [
     BrowserModule,

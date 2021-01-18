@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { Dashboard } from './dashboard.model';
+import { Task } from './task.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,5 +18,9 @@ export class TaskService {
 
   getDashboard(): Observable<Dashboard> {
     return this.http.get<Dashboard>(this.dashboardEndpoint);
+  }
+
+  getTaskListTasks(taskListId: any): Observable<Task[]> {
+    return this.http.get<Task[]>(this.listsEndpoint + `{taskListId}/tasks`);
   }
 }

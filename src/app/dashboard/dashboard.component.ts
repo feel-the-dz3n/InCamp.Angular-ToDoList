@@ -8,7 +8,7 @@ import { TaskList } from '../tasklist.model';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
-  selectedList: any;
+  selectedList: TaskList | undefined;
   todoLists: TaskList[] | undefined;
   @Output() select = new EventEmitter();
 
@@ -26,8 +26,13 @@ export class DashboardComponent {
   }
 
   selectTodoList(list: any) {
-    this.selectedList = list;
-    this.select.emit(list);
+    if (this.selectedList === list) {
+      this.selectedList = undefined; // uncheck
+    } else {
+      this.selectedList = list;
+    }
+
+    this.select.emit(this.selectedList);
   }
 
   isTodoListSelected(list: any) {

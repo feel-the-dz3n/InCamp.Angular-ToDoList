@@ -51,7 +51,8 @@ export class TodolistTasksComponent implements OnChanges {
   }
 
   taskRemoved(task: Task) {
-    this.tasks?.splice(this.tasks?.indexOf(task), 1);
+    // Let remove animation fade with timeout
+    setTimeout(() => this.tasks?.splice(this.tasks?.indexOf(task), 1), 500);
   }
 
   getTasks() {

@@ -7,6 +7,11 @@ form {
     height: 100%;
     align-items: center;
     justify-content: space-between;
+
+    &.loading {
+        animation: flicker 500ms ease-in-out infinite;
+        pointer-events: none;
+    }
 }
 
 input {

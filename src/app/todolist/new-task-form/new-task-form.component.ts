@@ -1,4 +1,7 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Task } from 'src/app/task.model';
+import { TaskService } from 'src/app/task.service';
+import { TaskList } from 'src/app/tasklist.model';
 
 @Component({
   selector: 'app-new-task-form',
@@ -6,9 +9,13 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./new-task-form.component.scss']
 })
 export class NewTaskFormComponent {
-  @Output() submitTask = new EventEmitter();
+  @Input() taskList: TaskList | undefined;
+  @Output() taskAdded = new EventEmitter();
 
   name: any;
+  isLoading: boolean = false;
+
+  constructor(private taskService: TaskService) { }
 
   addTask() {
     if (this.name === "") {
@@ -16,13 +23,22 @@ export class NewTaskFormComponent {
       return;
     }
 
-    this.submitTask.emit({
-      title: this.name,
-      description: null,
-      dueTime: null,
-      done: false
-    });
+    let task = new Task(undefined, false, this.name, undefined, undefined, this.taskList);
+    this.isLoading = true;
 
-    this.name = '';
+    this.taskService.addTask(task).subscribe(
+      (response) => {
+        this.taskAdded.emit(response);
+        this.name = '';
+      },
+      (error) => {
+        alert("Failed to add a new task");
+        console.log(error);
+        this.isLoading = false;
+      },
+      () => {
+        this.isLoading = false;
+      }
+    )
   }
 }

@@ -3,10 +3,9 @@ import { Task } from "./task.model";
 export class TaskList {
     id: any;
     name: string;
-    tasks: Task[];
 
-    constructor() {
-        this.name = "Unknown Task List";
-        this.tasks = [];
+    constructor(id: any, name: string) {
+        this.id = id;
+        this.name = name;
     }
 }

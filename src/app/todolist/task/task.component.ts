@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { Task } from 'src/app/task.model';
+import { TaskService } from 'src/app/task.service';
 
 @Component({
   selector: 'app-task',
@@ -14,15 +15,13 @@ export class TaskComponent {
   isModified: boolean;
   isUpdating: boolean;
   isRemoving: boolean;
-  dateString: string;
 
-  constructor() {
-    this.dateString = "";
+  constructor(private taskService: TaskService) {
     this.isRemoving = false;
     this.isModified = false;
     this.isUpdating = false;
-    this.task = new Task(0, false, "Unknown Task", null, null);
-    this.modificableTask = new Task(0, false, "Unknown Task", null, null);
+    this.task = new Task(0, false, "Unknown Task", undefined, undefined, undefined);
+    this.modificableTask = new Task(0, false, "Unknown Task", undefined, undefined, undefined);
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -74,21 +73,33 @@ export class TaskComponent {
     this.isUpdating = true;
     let updatedModel = Object.assign({}, this.modificableTask);
 
-    // Assign a new date, because ngModel at datetime-local 
-    // can't work with Date objects
-    updatedModel.dueTime = new Date(this.dateString);
-
-    // simulating request delay
-    setTimeout(() => {
-      this.isUpdating = false;
-      this.modelUpdated.emit(updatedModel);
-      this.isModified = false;
-    }, 500);
+    this.taskService.putTask(updatedModel.id, updatedModel).subscribe(
+      (r) => {
+        this.modelUpdated.emit(r);
+        this.isModified = false;
+      },
+      (e) => {
+        alert("Failed to update task");
+        console.log(e);
+        this.isUpdating = false;
+      },
+      () => {
+        this.isUpdating = false;
+      });
   }
 
   removeTask() {
     this.isRemoving = true;
-    this.remove.emit(this.task);
+    this.taskService.removeTask(this.task.id).subscribe(
+      (r) => {
+        this.remove.emit(this.task);
+      },
+      (e) => {
+        alert("Failed to remove task");
+        console.log(e);
+        this.isRemoving = false;
+      }
+    );
   }
 
   isNoDescription() {
@@ -96,7 +107,6 @@ export class TaskComponent {
   }
 
   isDueTimeValid() {
-    let dateTime = this.task.dueTime;
-    return dateTime && dateTime > new Date(0)
+    return this.task.dueTime && new Date(this.task.dueTime) > new Date(0)
   }
 }

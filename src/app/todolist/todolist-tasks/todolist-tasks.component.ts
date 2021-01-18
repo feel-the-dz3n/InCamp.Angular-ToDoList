@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
-import { IdService } from 'src/app/id.service';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Task } from 'src/app/task.model';
+import { TaskService } from 'src/app/task.service';
 import { TaskList } from 'src/app/tasklist.model';
 
 @Component({
@@ -8,42 +9,58 @@ import { TaskList } from 'src/app/tasklist.model';
   templateUrl: './todolist-tasks.component.html',
   styleUrls: ['./todolist-tasks.component.scss']
 })
-export class TodolistTasksComponent {
+export class TodolistTasksComponent implements OnChanges {
   @Input() list: TaskList;
+  tasks: Task[] | undefined;
+  isLoading: boolean = false;
 
-  constructor(private idService: IdService) {
-    this.list = new TaskList();
+  constructor(private taskService: TaskService) {
+    this.list = new TaskList(0, "Unknown");
   }
 
-  getTasks() {
-    if (this.list) return this.list.tasks;
-    else return [];
-  }
-
-  modelUpdated(newTask: Task) {
-    for (let oldTask of this.list.tasks) {
-      if (oldTask.id === newTask.id) {
-        console.log("old", oldTask, " -> ", newTask);
-        Object.assign(oldTask, newTask);
-        return;
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes["list"]) {
+      let newList = changes["list"].currentValue;
+      if (newList) {
+        this.isLoading = true;
+        this.refreshList(newList);
       }
     }
   }
 
-  addTask(task: Task) {
-    task.id = this.idService.getId();
-    this.list.tasks.push(task);
+  refreshList(list: TaskList) {
+    this.taskService.getTaskListTasks(list.id, true).subscribe(
+      (r) => { this.tasks = r; },
+      (e) => { alert("Failed to get tasks"); console.log(e); },
+      () => { this.isLoading = false; }
+    );
   }
 
-  removeTask(task: Task) {
-    setTimeout(() => {
-      let idx = this.list.tasks.indexOf(task);
-      this.list.tasks.splice(idx, 1);
-    }, 500);
+  modelUpdated(newTask: Task) {
+    if (this.tasks) {
+      for (let task of this.tasks) {
+        if (task.id === newTask.id) {
+          Object.assign(task, newTask);
+        }
+      }
+    }
+  }
+
+  taskAdded(task: Task) {
+    this.tasks?.push(task);
+  }
+
+  taskRemoved(task: Task) {
+    // Let remove animation fade with timeout
+    setTimeout(() => this.tasks?.splice(this.tasks?.indexOf(task), 1), 500);
+  }
+
+  getTasks() {
+    return this.isThereAreNoTasks() ? [] : this.tasks;
   }
 
   isThereAreNoTasks() {
-    return this.list && this.list.tasks.length == 0;
+    return this.tasks && this.tasks.length == 0;
   }
 
   isListAvailable() {

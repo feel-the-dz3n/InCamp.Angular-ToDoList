@@ -81,6 +81,7 @@ export class TaskComponent {
       (e) => {
         alert("Failed to update task");
         console.log(e);
+        this.isUpdating = false;
       },
       () => {
         this.isUpdating = false;

@@ -34,6 +34,7 @@ export class NewTaskFormComponent {
       (error) => {
         alert("Failed to add a new task");
         console.log(error);
+        this.isLoading = false;
       },
       () => {
         this.isLoading = false;

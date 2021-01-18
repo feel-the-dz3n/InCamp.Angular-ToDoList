@@ -1,10 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, ParamMap, Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { filter, map, switchMap } from 'rxjs/operators';
+import { Component } from '@angular/core';
 import { TaskListInfo } from '../task-list-info.model';
 import { TaskService } from '../task.service';
-import { TaskList } from '../tasklist.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,16 +10,14 @@ import { TaskList } from '../tasklist.model';
 export class DashboardComponent {
   isLoading: boolean = false;
   todoLists: TaskListInfo[] | undefined;
-  selectedListId: any;
 
   constructor(
-    private router: Router,
     private taskService: TaskService) {
   }
 
   ngOnInit() {
     this.isLoading = true;
-    
+
     this.taskService.getDashboard().subscribe(
       r => {
         this.todoLists = r.taskLists;

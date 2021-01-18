@@ -79,12 +79,18 @@ export class TaskComponent {
     // can't work with Date objects
     updatedModel.dueTime = new Date(this.dateString);
 
-    // simulating request delay
-    setTimeout(() => {
-      this.isUpdating = false;
-      this.modelUpdated.emit(updatedModel);
-      this.isModified = false;
-    }, 500);
+    this.taskService.putTask(updatedModel.id, updatedModel).subscribe(
+      (r) => {
+        this.modelUpdated.emit(r);
+        this.isModified = false;
+      },
+      (e) => {
+        alert("Failed to update task");
+        console.log(e);
+      },
+      () => {
+        this.isUpdating = false;
+      });
   }
 
   removeTask() {

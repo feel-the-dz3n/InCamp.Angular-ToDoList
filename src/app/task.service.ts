@@ -20,6 +20,10 @@ export class TaskService {
     return this.http.get<Dashboard>(this.dashboardEndpoint);
   }
 
+  putTask(taskId: number, task: Task): Observable<Task> {
+    return this.http.put<Task>(this.tasksEndpoint + `/${taskId}`, task);
+  }
+
   getTaskListTasks(taskListId: number): Observable<Task[]> {
     return this.http.get<Task[]>(this.listsEndpoint + `/${taskListId}/tasks`);
   }

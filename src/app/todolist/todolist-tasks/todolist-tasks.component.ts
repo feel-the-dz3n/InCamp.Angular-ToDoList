@@ -37,7 +37,13 @@ export class TodolistTasksComponent implements OnChanges {
   }
 
   modelUpdated(newTask: Task) {
-    // TODO
+    if (this.tasks) {
+      for (let task of this.tasks) {
+        if (task.id === newTask.id) {
+          Object.assign(task, newTask);
+        }
+      }
+    }
   }
 
   taskAdded(task: Task) {

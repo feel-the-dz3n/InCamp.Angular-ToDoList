@@ -12,38 +12,39 @@ export class TodolistTasksComponent {
   @Input() list: TaskList;
 
   constructor(private idService: IdService) {
-    this.list = new TaskList();
+    this.list = new TaskList(0, "Unknown");
   }
 
   getTasks() {
-    if (this.list) return this.list.tasks;
-    else return [];
+    /* if (this.list) return this.list.tasks;
+    else return []; */
+    return [];
   }
 
   modelUpdated(newTask: Task) {
-    for (let oldTask of this.list.tasks) {
+    /* for (let oldTask of this.list.tasks) {
       if (oldTask.id === newTask.id) {
         console.log("old", oldTask, " -> ", newTask);
         Object.assign(oldTask, newTask);
         return;
       }
-    }
+    } */
   }
 
   addTask(task: Task) {
-    task.id = this.idService.getId();
-    this.list.tasks.push(task);
+    // task.id = this.idService.getId();
+    // this.list.tasks.push(task);
   }
 
   removeTask(task: Task) {
-    setTimeout(() => {
+    /* setTimeout(() => {
       let idx = this.list.tasks.indexOf(task);
       this.list.tasks.splice(idx, 1);
-    }, 500);
+    }, 500); */
   }
 
   isThereAreNoTasks() {
-    return this.list && this.list.tasks.length == 0;
+    return true;// return this.list && this.list.tasks.length == 0;
   }
 
   isListAvailable() {

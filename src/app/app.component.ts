@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { IdService } from './id.service';
+import { Observable } from 'rxjs';
 import { Task } from './task.model';
+import { TaskService } from './task.service';
 import { TaskList } from './tasklist.model';
 
 
@@ -12,26 +13,15 @@ import { TaskList } from './tasklist.model';
 
 export class AppComponent implements OnInit {
   selectedList: any;
-  todoLists: TaskList[] = [];
+  todoLists: TaskList[] | undefined;
 
-  constructor(private idService: IdService) {
+  constructor(private taskService: TaskService) {
   }
 
   ngOnInit() {
-    this.todoLists = [
-      {
-        id: this.idService.getId(),
-        name: "Important Tasks", tasks: [
-          new Task(this.idService.getId(), false, "Buy Goods", "Bread, water, cat feed, etc.", null),
-          new Task(this.idService.getId(), true, "Wash a Car", null, new Date("2022.01.01 00:00:00")),
-          new Task(this.idService.getId(), false, "Write a Poem", "About programming patterns.", new Date("2022.05.01 22:28:00"))
-        ]
-      },
-      { id: this.idService.getId(), name: "Future Plans", tasks: [] },
-      { id: this.idService.getId(), name: "Work", tasks: [] },
-      { id: this.idService.getId(), name: "Ideas", tasks: [] },
-      { id: this.idService.getId(), name: "Stuff", tasks: [] },
-    ];
+    this.taskService.getDashboard().subscribe(o => {
+      // this.todoLists = o.taskLists.map(x => new TaskList(x.id, x.name));
+    });
   }
 
   selectTodoList(list: any) {

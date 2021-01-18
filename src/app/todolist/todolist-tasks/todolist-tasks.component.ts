@@ -29,7 +29,7 @@ export class TodolistTasksComponent implements OnChanges {
   }
 
   refreshList(list: TaskList) {
-    this.taskService.getTaskListTasks(list.id).subscribe(
+    this.taskService.getTaskListTasks(list.id, true).subscribe(
       (r) => { this.tasks = r; },
       (e) => { alert("Failed to get tasks"); console.log(e); },
       () => { this.isLoading = false; }

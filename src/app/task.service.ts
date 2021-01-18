@@ -24,8 +24,8 @@ export class TaskService {
     return this.http.put<Task>(this.tasksEndpoint + `/${taskId}`, task);
   }
 
-  getTaskListTasks(taskListId: number): Observable<Task[]> {
-    return this.http.get<Task[]>(this.listsEndpoint + `/${taskListId}/tasks`);
+  getTaskListTasks(taskListId: number, all: boolean): Observable<Task[]> {
+    return this.http.get<Task[]>(this.listsEndpoint + `/${taskListId}/tasks?all=${all}`);
   }
 
   addTask(task: Task): Observable<Task> {

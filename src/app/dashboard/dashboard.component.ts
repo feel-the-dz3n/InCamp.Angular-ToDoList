@@ -23,20 +23,7 @@ export class DashboardComponent {
 
   ngOnInit() {
     this.isLoading = true;
-
-    this.router.events.pipe(
-      filter(e => e instanceof NavigationEnd)).subscribe(
-        (r) => {
-          let nav = r as NavigationEnd;
-          if (nav.url.startsWith("/today")) {
-            this.selectedListId = undefined;
-          } else {
-            let listId = nav.url.split('/')[2];
-            console.log(listId);
-            this.selectedListId = listId;
-          }
-        });
-
+    
     this.taskService.getDashboard().subscribe(
       r => {
         this.todoLists = r.taskLists;

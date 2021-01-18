@@ -1,10 +1,9 @@
 <h3 *ngIf="isLoading" class="loading-text">Loading</h3>
 
 <ul *ngIf="!isLoading">
-    <li [routerLink]="['/today']" [class.selected]="!selectedListId">Today
+    <li [routerLink]="['/today']" [routerLinkActive]="['selected']">Today
     </li>
-    <li *ngFor="let list of todoLists" [routerLink]="['/todo-list', list.id]"
-        [class.selected]="selectedListId == list.id">
+    <li *ngFor="let list of todoLists" [routerLink]="['/todo-list', list.id]" [routerLinkActive]="['selected']">
         {{list.name}}
     </li>
 </ul>

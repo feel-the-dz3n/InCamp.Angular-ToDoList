@@ -3,12 +3,12 @@ import { TaskList } from "./tasklist.model";
 export class Task {
     id: any;
     done: boolean;
-    title: string | null;
-    dueTime: Date | null;
-    description: string | null;
-    taskList: TaskList | null;
+    title: string | undefined;
+    dueTime: Date | undefined;
+    description: string | undefined;
+    taskList: TaskList | undefined;
 
-    constructor(id: any, done: boolean, title: string | null, description: string | null, dueTime: Date | null, taskList: TaskList | null) {
+    constructor(id: any, done: boolean, title: string | undefined, description: string | undefined, dueTime: Date | undefined, taskList: TaskList | undefined) {
         this.id = id;
         this.title = title;
         this.done = done;

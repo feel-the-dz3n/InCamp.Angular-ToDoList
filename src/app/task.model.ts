@@ -1,16 +1,20 @@
+import { TaskList } from "./tasklist.model";
+
 export class Task {
     id: any;
     done: boolean;
     title: string | null;
     dueTime: Date | null;
     description: string | null;
+    taskList: TaskList | null;
 
-    constructor(id: any, done: boolean, title: string | null, description: string | null, dueTime: Date | null) {
+    constructor(id: any, done: boolean, title: string | null, description: string | null, dueTime: Date | null, taskList: TaskList | null) {
         this.id = id;
         this.title = title;
         this.done = done;
         this.dueTime = dueTime;
         this.description = description;
+        this.taskList = taskList;
     }
 
     getDateString(): any {

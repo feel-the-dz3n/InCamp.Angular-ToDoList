@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.taskService.getDashboard().subscribe(o => {
-      // this.todoLists = o.taskLists.map(x => new TaskList(x.id, x.name));
+      this.todoLists = o.taskLists.map(x => new TaskList(x.id, x.name));
     });
   }
 

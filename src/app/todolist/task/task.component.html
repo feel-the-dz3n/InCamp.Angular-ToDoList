@@ -2,6 +2,8 @@
     (submit)="updateTask()">
     <input type="checkbox" [(ngModel)]="modificableTask.done" name="done" (click)="doneChanged()">
     <div class="task-values">
+        <a *ngIf="showListLink && task.taskList"
+            [routerLink]="['/todo-list', task.taskList.id]">#{{task.taskList.name}}</a>
         <input type="text" [(ngModel)]="modificableTask.title" placeholder="Enter title" (input)="edit(false)"
             class="input-title" [class.strikethrough]="modificableTask.done" name="title">
         <input type="datetime-local" class="dueTime" [class.hidden]="!isModified && !isDueTimeValid()"

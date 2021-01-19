@@ -4,7 +4,7 @@
         "tasks")}} left for today.</h3>
     <h3 *ngIf="dashboard.todayTasksLeft == 0">👌 There are no tasks for today.</h3>
     <div class="tasks-container">
-        <app-task *ngFor="let task of todayTasks" [task]="task" (modelUpdated)="modelUpdated($event)"
+        <app-task *ngFor="let task of todayTasks" [task]="task" [showListLink]="true" (modelUpdated)="modelUpdated($event)"
             (remove)="taskRemoved($event)"></app-task>
     </div>
 </div>

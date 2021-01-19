@@ -9,6 +9,7 @@ import { TaskService } from 'src/app/task.service';
 })
 export class TaskComponent {
   @Input() task: Task;
+  @Input() showListLink: boolean = false;
   @Output() modelUpdated = new EventEmitter();
   @Output() remove = new EventEmitter();
   modificableTask: Task;

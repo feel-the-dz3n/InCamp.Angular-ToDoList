@@ -77,6 +77,7 @@ export class TaskComponent {
     this.taskService.putTask(updatedModel.id, updatedModel).subscribe(
       (r) => {
         this.modelUpdated.emit(r);
+        this.taskService.taskCountChanged.emit();
         this.isModified = false;
       },
       (e) => {
@@ -94,6 +95,7 @@ export class TaskComponent {
     this.taskService.removeTask(this.task.id).subscribe(
       (r) => {
         this.remove.emit(this.task);
+        this.taskService.taskCountChanged.emit();
       },
       (e) => {
         alert("Failed to remove task");

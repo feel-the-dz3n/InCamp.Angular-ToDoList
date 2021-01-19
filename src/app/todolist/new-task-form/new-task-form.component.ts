@@ -29,6 +29,7 @@ export class NewTaskFormComponent {
     this.taskService.addTask(task).subscribe(
       (response) => {
         this.taskAdded.emit(response);
+        this.taskService.taskCountChanged.emit();
         this.name = '';
       },
       (error) => {

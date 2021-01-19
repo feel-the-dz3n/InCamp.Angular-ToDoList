@@ -19,6 +19,8 @@ export class DashboardComponent {
   ngOnInit() {
     this.isLoading = true;
     this.refreshDashboard();
+
+    this.taskService.taskCountChanged.subscribe(() => this.refreshDashboard());
   }
 
   refreshDashboard() {

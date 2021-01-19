@@ -19,6 +19,8 @@ export class TodayTasksComponent implements OnInit {
 
     this.refreshDashboard();
     this.refreshTodayTasks();
+
+    this.taskService.taskCountChanged.subscribe(() => this.refreshDashboard());
   }
 
   refreshTodayTasks() {
@@ -67,7 +69,6 @@ export class TodayTasksComponent implements OnInit {
     if (this.todayTasks) {
       for (let oldTask of this.todayTasks) {
         if (oldTask.id === newTask.id) {
-          this.refreshDashboard();
           Object.assign(oldTask, newTask);
         }
       }

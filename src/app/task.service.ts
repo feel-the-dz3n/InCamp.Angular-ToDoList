@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { Dashboard } from './dashboard.model';
@@ -15,6 +15,8 @@ export class TaskService {
   private tasksEndpoint: string = this.endpoint + 'tasks';
   private listsEndpoint: string = this.endpoint + 'lists';
   private collectionEndpoint: string = this.endpoint + 'collection';
+
+  public taskCountChanged = new EventEmitter();
 
   constructor(private http: HttpClient) { }
 

@@ -10,7 +10,7 @@ import { TaskList } from './tasklist.model';
   providedIn: 'root'
 })
 export class TaskService {
-  private endpoint: string = 'http://192.168.1.10:8080/';
+  private endpoint: string = 'http://192.168.1.12:8080/';
   private dashboardEndpoint: string = this.endpoint + "dashboard";
   private tasksEndpoint: string = this.endpoint + "tasks";
   private listsEndpoint: string = this.endpoint + "lists";

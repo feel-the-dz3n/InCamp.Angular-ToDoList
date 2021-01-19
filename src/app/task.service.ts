@@ -24,6 +24,10 @@ export class TaskService {
     return this.http.get<Task[]>(this.collectionEndpoint + '/today');
   }
 
+  getTasksUntilToday(): Observable<Task[]> {
+    return this.http.get<Task[]>(this.collectionEndpoint + '/until-today');
+  }
+
   getTaskList(id: number): Observable<TaskList> {
     return this.http.get<TaskList>(this.listsEndpoint + `/${id}`);
   }

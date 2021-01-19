@@ -24,7 +24,7 @@ export class TodayTasksComponent implements OnInit {
   }
 
   refreshTodayTasks() {
-    this.taskService.getTasksForToday().subscribe(
+    this.taskService.getTasksUntilToday().subscribe(
       response => {
         this.todayTasks = response;
         this.isLoading = false;

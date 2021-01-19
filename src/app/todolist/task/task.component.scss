@@ -117,6 +117,10 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
     visibility: hidden;
 }
 
+.overdue {
+    color: rgb(165, 62, 62);
+}
+
 .task-values {
     margin-left: 16px;
     margin-right: 16px;

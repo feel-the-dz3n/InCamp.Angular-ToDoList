@@ -110,6 +110,10 @@ export class TaskComponent {
   }
 
   isDueTimeValid() {
-    return this.task.dueTime && new Date(this.task.dueTime) > new Date(0)
+    return this.task.dueTime && new Date(this.task.dueTime) > new Date(0);
+  }
+
+  isOverdue() {
+    return this.task.dueTime && new Date(this.task.dueTime) > new Date();
   }
 }

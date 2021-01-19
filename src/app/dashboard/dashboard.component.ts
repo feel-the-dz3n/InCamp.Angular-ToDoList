@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Dashboard } from '../dashboard.model';
-import { TaskListInfo } from '../task-list-info.model';
 import { TaskService } from '../task.service';
 
 @Component({

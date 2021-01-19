@@ -4,10 +4,9 @@
 
 <main>
     <div class="sidebar-container">
-        <app-dashboard (select)="selectTodoList($event)"></app-dashboard>
+        <app-dashboard></app-dashboard>
     </div>
     <div class="content-container">
         <router-outlet></router-outlet>
-        <!--<app-todolist-tasks [list]="selectedList"></app-todolist-tasks>!-->
     </div>
 </main>

@@ -7,9 +7,4 @@ import { Component } from '@angular/core';
 })
 
 export class AppComponent {
-  selectedList: any;
-
-  selectTodoList(list: any) {
-    this.selectedList = list;
-  }
 }

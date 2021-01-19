@@ -1,1 +1,5 @@
-<p>today-tasks works!</p>
+<div *ngIf="!isLoading">
+    <h3 *ngIf="dashboard.todayTasksLeft >= 1">📃 {{toPluralForm(dashboard.todayTasksLeft, "task", "tasks",
+        "tasks")}} left for today.</h3>
+    <h3 *ngIf="dashboard.todayTasksLeft == 0">👌 There are no tasks for today.</h3>
+</div>

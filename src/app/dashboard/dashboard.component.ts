@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Dashboard } from '../dashboard.model';
 import { TaskListInfo } from '../task-list-info.model';
 import { TaskService } from '../task.service';
 
@@ -9,7 +10,7 @@ import { TaskService } from '../task.service';
 })
 export class DashboardComponent {
   isLoading: boolean = false;
-  todoLists: TaskListInfo[] | undefined;
+  dashboard: Dashboard | undefined;
 
   constructor(
     private taskService: TaskService) {
@@ -17,15 +18,17 @@ export class DashboardComponent {
 
   ngOnInit() {
     this.isLoading = true;
+    this.refreshDashboard();
+  }
 
+  refreshDashboard() {
     this.taskService.getDashboard().subscribe(
       r => {
-        this.todoLists = r.taskLists;
+        this.dashboard = r;
         this.isLoading = false;
       },
       e => {
-        alert("Failed to fetch task lists");
-        console.log(e);
+        console.log("Failed to fetch dashboard", e);
         this.isLoading = false;
       });
   }

@@ -17,19 +17,11 @@ export class TodayTasksComponent implements OnInit {
   ngOnInit(): void {
     this.isLoading = true;
 
-    this.taskService.getDashboard().subscribe(
-      response => {
-        this.dashboard = response;
-        this.isLoading = false;
-      },
-      error => {
-        alert("Failed to load dashboard");
-        console.log(error);
+    this.refreshDashboard();
+    this.refreshTodayTasks();
+  }
 
-        this.isLoading = false;
-      }
-    );
-
+  refreshTodayTasks() {
     this.taskService.getTasksForToday().subscribe(
       response => {
         this.todayTasks = response;
@@ -37,6 +29,21 @@ export class TodayTasksComponent implements OnInit {
       },
       error => {
         alert("Failed to load today tasks");
+        console.log(error);
+
+        this.isLoading = false;
+      }
+    );
+  }
+
+  refreshDashboard() {
+    this.taskService.getDashboard().subscribe(
+      response => {
+        this.dashboard = response;
+        this.isLoading = false;
+      },
+      error => {
+        alert("Failed to load dashboard");
         console.log(error);
 
         this.isLoading = false;
@@ -55,11 +62,13 @@ export class TodayTasksComponent implements OnInit {
     return n + " " + word;
   }
 
+
   modelUpdated(newTask: Task) {
     if (this.todayTasks) {
-      for (let task of this.todayTasks) {
-        if (task.id === newTask.id) {
-          Object.assign(task, newTask);
+      for (let oldTask of this.todayTasks) {
+        if (oldTask.id === newTask.id) {
+          this.refreshDashboard();
+          Object.assign(oldTask, newTask);
         }
       }
     }

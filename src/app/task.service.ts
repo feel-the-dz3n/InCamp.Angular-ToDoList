@@ -11,11 +11,16 @@ import { TaskList } from './tasklist.model';
 })
 export class TaskService {
   private endpoint: string = 'http://192.168.1.12:8080/';
-  private dashboardEndpoint: string = this.endpoint + "dashboard";
-  private tasksEndpoint: string = this.endpoint + "tasks";
-  private listsEndpoint: string = this.endpoint + "lists";
+  private dashboardEndpoint: string = this.endpoint + 'dashboard';
+  private tasksEndpoint: string = this.endpoint + 'tasks';
+  private listsEndpoint: string = this.endpoint + 'lists';
+  private collectionEndpoint: string = this.endpoint + 'collection';
 
   constructor(private http: HttpClient) { }
+
+  getTasksForToday(): Observable<Task[]> {
+    return this.http.get<Task[]>(this.collectionEndpoint + '/today');
+  }
 
   getTaskList(id: number): Observable<TaskList> {
     return this.http.get<TaskList>(this.listsEndpoint + `/${id}`);

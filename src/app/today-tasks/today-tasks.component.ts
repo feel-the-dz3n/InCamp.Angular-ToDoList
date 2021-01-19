@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Dashboard } from '../dashboard.model';
+import { Task } from '../task.model';
 import { TaskService } from '../task.service';
 
 @Component({
@@ -10,6 +11,7 @@ import { TaskService } from '../task.service';
 export class TodayTasksComponent implements OnInit {
   isLoading: boolean = false;
   dashboard: Dashboard | undefined;
+  todayTasks: Task[] | undefined;
   constructor(private taskService: TaskService) { }
 
   ngOnInit(): void {
@@ -26,7 +28,20 @@ export class TodayTasksComponent implements OnInit {
 
         this.isLoading = false;
       }
-    )
+    );
+
+    this.taskService.getTasksForToday().subscribe(
+      response => {
+        this.todayTasks = response;
+        this.isLoading = false;
+      },
+      error => {
+        alert("Failed to load today tasks");
+        console.log(error);
+
+        this.isLoading = false;
+      }
+    );
   }
 
   toPluralForm(n: number, one: string, few: string, many: string) {
@@ -38,5 +53,20 @@ export class TodayTasksComponent implements OnInit {
     else word = many; // other cases
 
     return n + " " + word;
+  }
+
+  modelUpdated(newTask: Task) {
+    if (this.todayTasks) {
+      for (let task of this.todayTasks) {
+        if (task.id === newTask.id) {
+          Object.assign(task, newTask);
+        }
+      }
+    }
+  }
+
+  taskRemoved(task: Task) {
+    // Let remove animation fade with timeout
+    setTimeout(() => this.todayTasks?.splice(this.todayTasks?.indexOf(task), 1), 500);
   }
 }

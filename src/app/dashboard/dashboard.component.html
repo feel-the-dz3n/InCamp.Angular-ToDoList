@@ -2,7 +2,7 @@
 
 <ul *ngIf="!isLoading">
     <li [routerLink]="['/today']" [routerLinkActive]="['selected']">
-        <p class="name">Today</p>
+        <p class="name">🗓 Today</p>
         <p class="counter" *ngIf="dashboard?.todayTasksLeft >= 1">{{dashboard?.todayTasksLeft}}</p>
     </li>
     <li *ngFor="let list of dashboard?.taskLists" [routerLink]="['/todo-list', list.id]"

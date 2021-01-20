@@ -9,6 +9,7 @@ import { TaskService } from 'src/app/task.service';
 })
 export class TaskComponent {
   @Input() task: Task;
+  @Input() showListLink: boolean = false;
   @Output() modelUpdated = new EventEmitter();
   @Output() remove = new EventEmitter();
   modificableTask: Task;
@@ -76,6 +77,7 @@ export class TaskComponent {
     this.taskService.putTask(updatedModel.id, updatedModel).subscribe(
       (r) => {
         this.modelUpdated.emit(r);
+        this.taskService.taskCountChanged.emit();
         this.isModified = false;
       },
       (e) => {
@@ -93,6 +95,7 @@ export class TaskComponent {
     this.taskService.removeTask(this.task.id).subscribe(
       (r) => {
         this.remove.emit(this.task);
+        this.taskService.taskCountChanged.emit();
       },
       (e) => {
         alert("Failed to remove task");
@@ -107,6 +110,10 @@ export class TaskComponent {
   }
 
   isDueTimeValid() {
-    return this.task.dueTime && new Date(this.task.dueTime) > new Date(0)
+    return this.task.dueTime && new Date(this.task.dueTime) > new Date(0);
+  }
+
+  isOverdue() {
+    return this.task.dueTime && new Date(this.task.dueTime) < new Date();
   }
 }

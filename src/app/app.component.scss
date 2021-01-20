@@ -36,8 +36,13 @@ main {
         border-right: 1px solid $borderColor;
     }
 
-    .task-list-container {
+    .content-container {
         flex-basis: 75%;
+        width: 100%;
         overflow: hidden;
+    
+        router-outlet {
+            width: 100%;
+        }
     }
 }

@@ -1,35 +1,42 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { Task } from 'src/app/task.model';
 import { TaskService } from 'src/app/task.service';
 import { TaskList } from 'src/app/tasklist.model';
 
 @Component({
-  selector: 'app-todolist-tasks',
-  templateUrl: './todolist-tasks.component.html',
-  styleUrls: ['./todolist-tasks.component.scss']
+  selector: 'app-todo-list',
+  templateUrl: './todo-list.component.html',
+  styleUrls: ['./todo-list.component.scss']
 })
-export class TodolistTasksComponent implements OnChanges {
-  @Input() list: TaskList;
+export class TodoListComponent implements OnInit {
+  listId: any;
   tasks: Task[] | undefined;
   isLoading: boolean = false;
 
-  constructor(private taskService: TaskService) {
-    this.list = new TaskList(0, "Unknown");
+  constructor(
+    private route: ActivatedRoute,
+    private taskService: TaskService) {
+    // this.list = new TaskList(0, "Unknown");
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes["list"]) {
-      let newList = changes["list"].currentValue;
-      if (newList) {
-        this.isLoading = true;
-        this.refreshList(newList);
-      }
-    }
+  ngOnInit() {
+    this.isLoading = true;
+
+    this.route.paramMap.pipe(
+      switchMap(async (params) => params.get('id'))
+    ).subscribe(data => {
+      console.log("route for todo-list changed", data);
+      this.listId = data;
+      this.isLoading = true;
+      this.refreshListTasks();
+    });
   }
 
-  refreshList(list: TaskList) {
-    this.taskService.getTaskListTasks(list.id, true).subscribe(
+  refreshListTasks() {
+    this.taskService.getTaskListTasks(this.listId, true).subscribe(
       (r) => { this.tasks = r; },
       (e) => { alert("Failed to get tasks"); console.log(e); },
       () => { this.isLoading = false; }
@@ -64,7 +71,7 @@ export class TodolistTasksComponent implements OnChanges {
   }
 
   isListAvailable() {
-    return this.list ? true : false;
+    return this.listId ? true : false;
   }
 
   isListNotAvailable() {

@@ -1,4 +1,4 @@
-@import "../../../styles.scss";
+@import "../../styles.scss";
 
 @keyframes fadeIn {
   0% {
@@ -50,9 +50,27 @@ ul {
   li {
     @extend .list-group-item;
 
-    animation: fadeIn 200ms ease-in-out forwards;
     background: rgba(255, 255, 255, 0.78);
     cursor: pointer;
+    display: flex;
+    flex-flow: row;
+
+    .name, .counter {
+      margin: 0;
+      padding: 0;
+      
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+
+    .name {
+      flex: 1;
+    }
+
+    .counter {
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.199);
+    }
   }
 
   li.selected {

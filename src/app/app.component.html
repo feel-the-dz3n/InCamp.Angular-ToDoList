@@ -4,9 +4,9 @@
 
 <main>
     <div class="sidebar-container">
-        <app-todolist-sidebar [todoLists]="todoLists" (select)="selectTodoList($event)"></app-todolist-sidebar>
+        <app-dashboard></app-dashboard>
     </div>
-    <div class="task-list-container">
-        <app-todolist-tasks [list]="selectedList"></app-todolist-tasks>
+    <div class="content-container">
+        <router-outlet></router-outlet>
     </div>
 </main>

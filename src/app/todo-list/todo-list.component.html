@@ -7,6 +7,6 @@
             (remove)="taskRemoved($event)"></app-task>
     </div>
     <app-new-task-form class="new-task-form-container" *ngIf="isListAvailable()" (taskAdded)="taskAdded($event)"
-        [taskList]="list">
+        [taskListId]="listId">
     </app-new-task-form>
 </div>

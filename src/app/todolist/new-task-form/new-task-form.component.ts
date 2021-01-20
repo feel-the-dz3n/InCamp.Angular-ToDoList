@@ -9,7 +9,7 @@ import { TaskList } from 'src/app/tasklist.model';
   styleUrls: ['./new-task-form.component.scss']
 })
 export class NewTaskFormComponent {
-  @Input() taskList: TaskList | undefined;
+  @Input() taskListId: any;
   @Output() taskAdded = new EventEmitter();
 
   name: any;
@@ -23,12 +23,13 @@ export class NewTaskFormComponent {
       return;
     }
 
-    let task = new Task(undefined, false, this.name, undefined, undefined, this.taskList);
+    let task = new Task(undefined, false, this.name, undefined, undefined, new TaskList(this.taskListId, undefined));
     this.isLoading = true;
 
     this.taskService.addTask(task).subscribe(
       (response) => {
         this.taskAdded.emit(response);
+        this.taskService.taskCountChanged.emit();
         this.name = '';
       },
       (error) => {
